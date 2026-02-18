@@ -1,0 +1,166 @@
+{
+  "categories": [
+    { "id": "automotive", "name": "Automotive", "icon": "🚗" },
+    { "id": "carpentry", "name": "Carpentry", "icon": "🪚" },
+    { "id": "electrical", "name": "Electrical", "icon": "⚡" },
+    { "id": "plumbing", "name": "Plumbing", "icon": "🔧" },
+    { "id": "masonry", "name": "Masonry", "icon": "🧱" },
+    { "id": "general", "name": "General", "icon": "🛠️" }
+  ],
+  "tools": [
+    {
+      "id": "t1",
+      "name": "Socket Set",
+      "category": "automotive",
+      "description": "Metric and SAE socket set for nuts and bolts. Includes ratchet, extensions, and multiple drive sizes.",
+      "image": "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=400&h=300&fit=crop"
+    },
+    {
+      "id": "t2",
+      "name": "Oil Filter Wrench",
+      "category": "automotive",
+      "description": "Removes and installs spin-on oil filters. Available in strap, cap, and chain styles.",
+      "image": "https://images.unsplash.com/photo-1565688534245-05d6b5be184a?w=400&h=300&fit=crop"
+    },
+    {
+      "id": "t3",
+      "name": "Jack Stands",
+      "category": "automotive",
+      "description": "Safety stands to support a raised vehicle. Always use with a hydraulic jack.",
+      "image": "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400&h=300&fit=crop"
+    },
+    {
+      "id": "t4",
+      "name": "Claw Hammer",
+      "category": "carpentry",
+      "description": "General-purpose hammer with a curved claw for pulling nails. 16 oz is common for framing.",
+      "image": "https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=400&h=300&fit=crop"
+    },
+    {
+      "id": "t5",
+      "name": "Circular Saw",
+      "category": "carpentry",
+      "description": "Power saw for straight cuts in lumber, plywood, and sheet goods. Adjustable depth and angle.",
+      "image": "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=400&h=300&fit=crop"
+    },
+    {
+      "id": "t6",
+      "name": "Chisel Set",
+      "category": "carpentry",
+      "description": "Bevel-edge chisels for woodworking: paring, mortising, and general shaping.",
+      "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop"
+    },
+    {
+      "id": "t7",
+      "name": "Tape Measure",
+      "category": "carpentry",
+      "description": "Retractable measuring tape. 25 ft is standard; wide blade for stability when extended.",
+      "image": "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=400&h=300&fit=crop"
+    },
+    {
+      "id": "t8",
+      "name": "Speed Square",
+      "category": "carpentry",
+      "description": "Triangular layout and marking tool. Used for 90° and 45° angles and as a saw guide.",
+      "image": "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=400&h=300&fit=crop"
+    },
+    {
+      "id": "t9",
+      "name": "Wire Strippers",
+      "category": "electrical",
+      "description": "Strips insulation from electrical wire. Often includes cutting and crimping notches.",
+      "image": "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=400&h=300&fit=crop"
+    },
+    {
+      "id": "t10",
+      "name": "Multimeter",
+      "category": "electrical",
+      "description": "Measures voltage, current, and resistance. Essential for troubleshooting circuits.",
+      "image": "https://images.unsplash.com/photo-1581092918484-8313e1b9b0d6?w=400&h=300&fit=crop"
+    },
+    {
+      "id": "t11",
+      "name": "Lineman's Pliers",
+      "category": "electrical",
+      "description": "Heavy-duty pliers for cutting wire, twisting conductors, and gripping. Insulated handles.",
+      "image": "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=400&h=300&fit=crop"
+    },
+    {
+      "id": "t12",
+      "name": "Voltage Tester",
+      "category": "electrical",
+      "description": "Non-contact or probe tester to verify presence of voltage before working.",
+      "image": "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=400&h=300&fit=crop"
+    },
+    {
+      "id": "t13",
+      "name": "Pipe Wrench",
+      "category": "plumbing",
+      "description": "Adjustable wrench for pipes and fittings. Serrated jaws grip round pipe. Two used in opposition for turning.",
+      "image": "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=400&h=300&fit=crop"
+    },
+    {
+      "id": "t14",
+      "name": "Plunger",
+      "category": "plumbing",
+      "description": "Creates pressure to clear clogs in toilets and drains. Flange type for toilets.",
+      "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop"
+    },
+    {
+      "id": "t15",
+      "name": "Basin Wrench",
+      "category": "plumbing",
+      "description": "Reaches up behind sinks to tighten or loosen nuts on faucets and supply lines.",
+      "image": "https://images.unsplash.com/photo-1565688534245-05d6b5be184a?w=400&h=300&fit=crop"
+    },
+    {
+      "id": "t16",
+      "name": "Trowel",
+      "category": "masonry",
+      "description": "Flat or pointed blade for spreading mortar, concrete, and plaster. Pointing trowel for joints.",
+      "image": "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=400&h=300&fit=crop"
+    },
+    {
+      "id": "t17",
+      "name": "Mason's Hammer",
+      "category": "masonry",
+      "description": "One face for striking chisels; opposite for breaking and trimming brick and block.",
+      "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop"
+    },
+    {
+      "id": "t18",
+      "name": "Level",
+      "category": "masonry",
+      "description": "Spirit or laser level for establishing plumb and level lines in masonry and framing.",
+      "image": "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=400&h=300&fit=crop"
+    },
+    {
+      "id": "t19",
+      "name": "Screwdriver Set",
+      "category": "general",
+      "description": "Flat and Phillips in multiple sizes. Essential for assembly and repair.",
+      "image": "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=400&h=300&fit=crop"
+    },
+    {
+      "id": "t20",
+      "name": "Adjustable Wrench",
+      "category": "general",
+      "description": "Jaw width adjusts to fit different nut and bolt sizes. Common sizes 6\" to 18\".",
+      "image": "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=400&h=300&fit=crop"
+    },
+    {
+      "id": "t21",
+      "name": "Utility Knife",
+      "category": "general",
+      "description": "Retractable blade for cutting cardboard, drywall, rope, and opening packages.",
+      "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop"
+    },
+    {
+      "id": "t22",
+      "name": "Pliers Set",
+      "category": "general",
+      "description": "Slip-joint, needle-nose, and locking pliers for gripping, bending, and cutting.",
+      "image": "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=400&h=300&fit=crop"
+    }
+  ]
+}

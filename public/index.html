@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Polaris Tool & Building Catalog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="logo">Polaris<span>Tools</span></a>
+      <p class="tagline">Hand Tools & Building Materials</p>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="hero">
+      <div class="container">
+        <h1>Tool & Building Catalog</h1>
+        <p>Browse by category to find the right hand tools and components for your project.</p>
+      </div>
+    </section>
+
+    <section class="categories-section">
+      <div class="container">
+        <h2 class="section-title">Categories</h2>
+        <div class="tabs" role="tablist">
+          <button type="button" class="tab active" data-category="all" role="tab" aria-selected="true">All</button>
+          <!-- Category tabs injected by JS -->
+        </div>
+      </div>
+    </section>
+
+    <section class="tools-section">
+      <div class="container">
+        <div class="tools-grid" id="tools-grid">
+          <!-- Tool cards injected by JS -->
+          <div class="loading" id="loading">Loading tools…</div>
+          <div class="empty-state hidden" id="empty-state">No tools in this category.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Polaris Tool & Building Catalog — Hand tools and building materials.</p>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

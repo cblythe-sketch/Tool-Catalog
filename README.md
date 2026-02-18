@@ -22,6 +22,23 @@ A full-stack website that catalogs hand tools and building materials by category
 
 3. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
+## Matching each photo to the tool name
+
+So that the image above each tool card shows **that specific tool** (e.g. spark plug socket, tire pressure gauge, multimeter), run the fetch script once with a free API key:
+
+1. Get a free **Pexels** API key: [pexels.com/api](https://www.pexels.com/api/) (recommended; 200 requests/hour).
+2. From the project folder run:
+   ```bash
+   PEXELS_API_KEY=your_key_here node scripts/fetch-unsplash-by-tool-name.js
+   ```
+   Or use **Unsplash**: get a key at [unsplash.com/developers](https://unsplash.com/developers), then:
+   ```bash
+   UNSPLASH_ACCESS_KEY=your_key_here node scripts/fetch-unsplash-by-tool-name.js
+   ```
+3. The script searches for a photo matching each tool name and updates `data/tools.json`. Restart or refresh the app to see the new images.
+
+Copy `.env.example` to `.env` and add your key there if you prefer not to type it in the command.
+
 ## API
 
 - `GET /api/categories` — List all categories
@@ -53,6 +70,6 @@ Edit `data/tools.json`. Each tool needs:
 - `name` — display name
 - `category` — one of: `automotive`, `carpentry`, `electrical`, `plumbing`, `masonry`, `general`
 - `description` — short description
-- `image` — full URL to a photo (e.g. Unsplash, or your own host)
+- `image` — full URL to a photo. To have each card show a photo of that specific tool, run `scripts/fetch-unsplash-by-tool-name.js` with a Pexels or Unsplash API key (see above). You can also replace any `image` in `data/tools.json` manually with a direct photo URL.
 
 To add a category, add an object to `categories` with `id`, `name`, and optional `icon` (emoji).

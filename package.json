@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "update-images": "node scripts/fetch-unsplash-by-tool-name.js"
   },
   "keywords": ["tools", "catalog", "building"],
   "author": "",

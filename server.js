@@ -2,6 +2,20 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
+const OpenAI = require('openai').default;
+
+// Load .env if present
+const envPath = path.join(__dirname, '.env');
+if (fs.existsSync(envPath)) {
+  const env = fs.readFileSync(envPath, 'utf8');
+  env.split(/\r?\n/).forEach((line) => {
+    const m = line.match(/^\s*([^#=]+)=(.*)$/);
+    if (m) {
+      const val = m[2].trim().replace(/\r$/, '').replace(/^["']|["']$/g, '');
+      process.env[m[1].trim()] = val;
+    }
+  });
+}
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -51,6 +65,67 @@ app.get('/api/tools/:id', (req, res) => {
     res.json(tool);
   } catch (err) {
     res.status(500).json({ error: 'Failed to load tool' });
+  }
+});
+
+// Build catalog summary for AI context
+function getCatalogSummary() {
+  const data = loadData();
+  const byCat = {};
+  data.tools.forEach((t) => {
+    if (!byCat[t.category]) byCat[t.category] = [];
+    byCat[t.category].push(t.name);
+  });
+  const catNames = (data.categories || []).map((c) => c.name).join(', ');
+  const toolList = Object.entries(byCat)
+    .map(([cat, names]) => `${cat}: ${names.slice(0, 12).join(', ')}${names.length > 12 ? '...' : ''}`)
+    .join('\n');
+  return { catNames, toolList };
+}
+
+// AI chat: tool questions + build/how-to instructions
+app.post('/api/chat', async (req, res) => {
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) {
+    return res.status(503).json({ error: 'Chat is not configured. Add OPENAI_API_KEY to .env.' });
+  }
+
+  const { message, history = [] } = req.body || {};
+  if (!message || typeof message !== 'string') {
+    return res.status(400).json({ error: 'Message is required' });
+  }
+
+  const { catNames, toolList } = getCatalogSummary();
+  const systemPrompt = `You are the assistant for Polaris Tool Catalog, a site that lists hand tools and building materials by category.
+
+Your role:
+1) Answer questions about hand tools and building materials. When relevant, mention that the user can browse our catalog (we have categories: ${catNames}). You can reference specific tools we list when helpful.
+2) Give clear, step-by-step build or how-to instructions when users ask to build something or how to do a task (e.g. "I want to build a table", "How do I change the oil in my car?", "How do I hang drywall?"). For each step, suggest which tools from our catalog would be useful when it makes sense.
+
+Catalog summary (tools we have):
+${toolList}
+
+Keep answers concise and practical. Use markdown for lists and steps when helpful. Do not make up tool names that are not in the catalog; stick to the categories and tools listed.`;
+
+  const messages = [
+    { role: 'system', content: systemPrompt },
+    ...history.slice(-10).map((m) => ({ role: m.role, content: m.content })),
+    { role: 'user', content: message.trim() },
+  ];
+
+  try {
+    const openai = new OpenAI({ apiKey });
+    const completion = await openai.chat.completions.create({
+      model: 'gpt-4o-mini',
+      messages,
+      max_tokens: 1024,
+    });
+    const reply = completion.choices?.[0]?.message?.content || 'I couldn’t generate a response. Try again.';
+    res.json({ reply });
+  } catch (err) {
+    console.error('OpenAI error:', err.message);
+    const status = err.status === 401 ? 503 : 500;
+    res.status(status).json({ error: err.message || 'Chat request failed.' });
   }
 });
 

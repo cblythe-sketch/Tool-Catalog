@@ -39,11 +39,22 @@ So that the image above each tool card shows **that specific tool** (e.g. spark 
 
 Copy `.env.example` to `.env` and add your key there if you prefer not to type it in the command.
 
+## AI chat agent
+
+The site includes a chat widget (button in the bottom-right) that answers questions about tools and gives **build/how-to instructions** (e.g. “I want to build a table”, “How do I change the oil in my car?”). It uses OpenAI and is aware of the tools in the catalog.
+
+1. Get an **OpenAI API key**: [platform.openai.com/api-keys](https://platform.openai.com/api-keys)
+2. Add to `.env`: `OPENAI_API_KEY=your_key`
+3. Restart the server. Open the chat and ask e.g. “How do I change the oil in my car?” or “I want to build a table.”
+
+If `OPENAI_API_KEY` is not set, the chat panel will show an error when you send a message.
+
 ## API
 
 - `GET /api/categories` — List all categories
 - `GET /api/tools` — List all tools (optional: `?category=automotive`)
 - `GET /api/tools/:id` — Get one tool by id
+- `POST /api/chat` — AI chat (body: `{ "message": "…", "history": [] }`)
 
 ## Project structure
 

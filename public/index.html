@@ -52,6 +52,27 @@
     </div>
   </footer>
 
+  <!-- AI Chat widget -->
+  <div class="chat-widget" id="chat-widget" aria-hidden="true">
+    <div class="chat-panel">
+      <div class="chat-header">
+        <h3>Tool & build assistant</h3>
+        <button type="button" class="chat-close" id="chat-close" aria-label="Close chat">&times;</button>
+      </div>
+      <div class="chat-messages" id="chat-messages">
+        <div class="chat-msg assistant">
+          <p>Ask me about tools in the catalog, or how to build something—e.g. &ldquo;I want to build a table&rdquo; or &ldquo;How do I change the oil in my car?&rdquo;</p>
+        </div>
+      </div>
+      <div class="chat-input-wrap">
+        <textarea class="chat-input" id="chat-input" rows="1" placeholder="Ask a question…" maxlength="2000"></textarea>
+        <button type="button" class="chat-send" id="chat-send" aria-label="Send">Send</button>
+      </div>
+    </div>
+  </div>
+  <button type="button" class="chat-toggle" id="chat-toggle" aria-label="Open chat">Chat</button>
+
   <script src="js/app.js"></script>
+  <script src="js/chat.js"></script>
 </body>
 </html>

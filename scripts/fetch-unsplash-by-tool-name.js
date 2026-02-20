@@ -177,6 +177,10 @@ async function main() {
 
   for (let i = 0; i < data.tools.length; i++) {
     const tool = data.tools[i];
+    if (tool.image && (tool.image.startsWith('/') || tool.image.includes('/images/'))) {
+      console.log(`[${i + 1}/${data.tools.length}] ${tool.name} (keeping custom image)`);
+      continue;
+    }
     const query = getSearchQuery(tool) + NO_PERSON_SUFFIX;
     let imageUrl = null;
     try {

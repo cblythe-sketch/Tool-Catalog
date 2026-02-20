@@ -171,6 +171,9 @@ body {
   color: var(--text-muted);
 }
 
+.hidden {
+  display: none !important;
+}
 .tools-grid .hidden {
   display: none;
 }
@@ -191,12 +194,28 @@ body {
   transform: translateY(-2px);
 }
 
+.tool-card-link {
+  display: block;
+  line-height: 0;
+}
+.tool-card-link:hover .tool-card-image {
+  opacity: 0.95;
+}
 .tool-card-image {
   aspect-ratio: 4/3;
   background: var(--surface-hover);
   object-fit: cover;
   width: 100%;
   display: block;
+  transition: opacity 0.2s;
+}
+.tool-card-name-link {
+  color: inherit;
+  text-decoration: none;
+}
+.tool-card-name-link:hover {
+  color: var(--accent);
+  text-decoration: underline;
 }
 
 .tool-card-body {
@@ -370,6 +389,39 @@ body {
   line-height: 1.5;
   white-space: pre-wrap;
 }
+.chat-msg-body {
+  line-height: 1.5;
+}
+.chat-msg-body h2 {
+  font-size: 0.95rem;
+  margin: 1rem 0 0.5rem;
+  color: var(--accent);
+}
+.chat-msg-body h2:first-child {
+  margin-top: 0;
+}
+.chat-msg-body img,
+.chat-msg-body .chat-instruct-icon {
+  display: block;
+  max-width: 48px;
+  height: auto;
+  margin: 0.25rem 0;
+  vertical-align: middle;
+}
+.chat-msg-body .chat-instruct-icon {
+  margin: 0.5rem 0 0.25rem;
+}
+.chat-msg-body ul,
+.chat-msg-body ol {
+  margin: 0.5rem 0;
+  padding-left: 1.25rem;
+}
+.chat-msg-body li {
+  margin-bottom: 0.25rem;
+}
+.chat-msg-body strong {
+  font-weight: 700;
+}
 .chat-msg .loading-dots::after {
   content: '';
   animation: chat-loading 1s steps(3) infinite;
@@ -433,6 +485,126 @@ body {
 .chat-send:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+/* Tool detail page — same black & yellow theme as main catalog */
+.tool-detail {
+  padding: 2rem 0 3rem;
+  min-height: 60vh;
+  background: var(--bg);
+  color: var(--text);
+}
+.tool-detail.hidden {
+  display: none;
+}
+.tool-detail .container {
+  max-width: 900px;
+}
+.tool-detail-back {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+  font-family: var(--font-body);
+}
+.tool-detail-back:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+.tool-detail-loading,
+.tool-detail-error {
+  color: var(--text-muted);
+  font-family: var(--font-body);
+}
+.tool-detail-card {
+  display: grid;
+  gap: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+@media (min-width: 640px) {
+  .tool-detail-card {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    padding: 2rem;
+  }
+}
+.tool-detail-image {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface-hover);
+}
+.tool-detail-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.tool-detail-category {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  font-family: var(--font-body);
+}
+.tool-detail-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  letter-spacing: 0.02em;
+  margin: 0 0 0.5rem;
+  color: var(--text);
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--accent);
+}
+.tool-detail-desc {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.6;
+  font-family: var(--font-body);
+}
+.tool-detail-uses {
+  margin-top: 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+.tool-detail-uses h2 {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 0.5rem;
+  color: var(--accent);
+  font-family: var(--font-body);
+}
+.tool-detail-uses-list {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-family: var(--font-body);
+}
+.tool-detail-uses-list li {
+  margin-bottom: 0.35rem;
+}
+.tool-detail-uses-fallback {
+  margin: 0.5rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-family: var(--font-body);
+}
+.tool-detail-error {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  text-align: center;
 }
 
 /* Responsive */

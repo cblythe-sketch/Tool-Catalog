@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
   <header class="site-header">
@@ -17,7 +17,7 @@
     </div>
   </header>
 
-  <section class="categories-section categories-section--top">
+  <section class="categories-section categories-section--top" id="categories-section">
     <div class="container">
       <div class="tabs" role="tablist">
         <button type="button" class="tab active" data-category="all" role="tab" aria-selected="true">All</button>
@@ -26,7 +26,7 @@
     </div>
   </section>
 
-  <main class="main">
+  <main class="main" id="main-catalog">
     <section class="hero">
       <div class="container">
         <h1>Tool & Building Catalog</h1>
@@ -43,6 +43,27 @@
         </div>
       </div>
     </section>
+  </main>
+
+  <main class="tool-detail hidden" id="tool-detail">
+    <div class="container">
+      <a href="/" class="tool-detail-back" id="tool-detail-back">&larr; Back to catalog</a>
+      <div class="tool-detail-loading" id="tool-detail-loading">Loading…</div>
+      <article class="tool-detail-card hidden" id="tool-detail-card">
+        <img class="tool-detail-image" id="tool-detail-image" alt="" />
+        <div class="tool-detail-body">
+          <span class="tool-detail-category" id="tool-detail-category"></span>
+          <h1 class="tool-detail-name" id="tool-detail-name"></h1>
+          <p class="tool-detail-desc" id="tool-detail-desc"></p>
+          <section class="tool-detail-uses" id="tool-detail-uses-wrap">
+            <h2>Common uses</h2>
+            <ul class="tool-detail-uses-list" id="tool-detail-uses-list"></ul>
+            <p class="tool-detail-uses-fallback hidden" id="tool-detail-uses-fallback"></p>
+          </section>
+        </div>
+      </article>
+      <div class="tool-detail-error hidden" id="tool-detail-error">Tool not found.</div>
+    </div>
   </main>
 
   <footer class="site-footer">
@@ -71,7 +92,8 @@
   </div>
   <button type="button" class="chat-toggle" id="chat-toggle" aria-label="Open chat">Chat</button>
 
-  <script src="js/app.js"></script>
-  <script src="js/chat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/chat.js"></script>
 </body>
 </html>

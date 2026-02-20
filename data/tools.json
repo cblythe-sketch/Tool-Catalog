@@ -214,7 +214,15 @@
       "name": "Miter Saw",
       "category": "carpentry",
       "description": "Power saw for accurate angled and cross cuts. Compound miter for crown and trim.",
-      "image": "/images/miter-saw.png"
+      "image": "/images/miter-saw.png",
+      "uses": [
+        "Cross-cutting lumber and trim to length",
+        "Cutting 45° miters for picture frames and corner joints",
+        "Crown molding and baseboard installation",
+        "Cutting trim for doors and windows",
+        "Making angled cuts for furniture and cabinetry",
+        "Cutting deck boards and railing at angles"
+      ]
     },
     {
       "id": "t23",

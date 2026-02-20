@@ -74,7 +74,7 @@
       "name": "Oil Filter Wrench",
       "category": "automotive",
       "description": "Removes and installs spin-on oil filters. Available in strap, cap, and chain styles.",
-      "image": "https://images.pexels.com/photos/4116171/pexels-photo-4116171.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
+      "image": "/images/oil-filter-wrench.png"
     },
     {
       "id": "t3",

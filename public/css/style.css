@@ -422,6 +422,12 @@ body {
 .chat-msg-body strong {
   font-weight: 700;
 }
+.chat-msg-body a {
+  color: var(--accent);
+}
+.chat-msg-body a:visited {
+  color: var(--accent);
+}
 .chat-msg .loading-dots::after {
   content: '';
   animation: chat-loading 1s steps(3) infinite;

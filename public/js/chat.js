@@ -54,7 +54,7 @@
       const id = nameToId[name];
       const link = '[' + name + '](/tool/' + id + ')';
       var escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      var re = new RegExp('(?<!\\[)' + escaped + '(?!\\])', 'g');
+      var re = new RegExp('(?<!\\[)' + escaped + '(?!\\])');
       out = out.replace(re, link);
     });
     return out;

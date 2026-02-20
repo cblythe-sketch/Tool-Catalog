@@ -102,7 +102,7 @@
       "name": "Breaker Bar",
       "category": "automotive",
       "description": "Long-handled bar for loosening stuck nuts and bolts. Used with sockets.",
-      "image": "https://images.pexels.com/photos/9607010/pexels-photo-9607010.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
+      "image": "/images/breaker-bar.png"
     },
     {
       "id": "t7",
@@ -179,7 +179,7 @@
       "name": "Circular Saw",
       "category": "carpentry",
       "description": "Power saw for straight cuts in lumber, plywood, and sheet goods. Adjustable depth and angle.",
-      "image": "https://images.pexels.com/photos/7492884/pexels-photo-7492884.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
+      "image": "/images/circular-saw.png"
     },
     {
       "id": "t18",
@@ -214,7 +214,7 @@
       "name": "Miter Saw",
       "category": "carpentry",
       "description": "Power saw for accurate angled and cross cuts. Compound miter for crown and trim.",
-      "image": "https://images.pexels.com/photos/34602783/pexels-photo-34602783.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
+      "image": "/images/miter-saw.png"
     },
     {
       "id": "t23",
@@ -242,14 +242,14 @@
       "name": "Hand Saw",
       "category": "carpentry",
       "description": "Crosscut or rip saw for manual cutting of lumber. Various tooth counts for different work.",
-      "image": "https://images.pexels.com/photos/30907885/pexels-photo-30907885.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
+      "image": "/images/hand-saw.png"
     },
     {
       "id": "t27",
       "name": "Coping Saw",
       "category": "carpentry",
       "description": "Fine blade in a U-frame for curved and intricate cuts, e.g. coping moldings.",
-      "image": "https://images.pexels.com/photos/14357249/pexels-photo-14357249.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
+      "image": "/images/coping-saw.png"
     },
     {
       "id": "t28",

@@ -34,7 +34,7 @@
       btn.setAttribute('data-category', cat.id);
       btn.setAttribute('role', 'tab');
       btn.setAttribute('aria-selected', 'false');
-      btn.textContent = `${cat.icon || ''} ${cat.name}`.trim();
+      btn.textContent = cat.name;
       fragment.appendChild(btn);
     });
     tabsContainer.appendChild(fragment);

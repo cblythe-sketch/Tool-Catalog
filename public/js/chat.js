@@ -60,7 +60,13 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: text, history }),
       });
-      const data = await res.json();
+      let data;
+      try {
+        data = await res.json();
+      } catch (_) {
+        setMessageContent(placeholder, 'Server returned an invalid response. Make sure the app is running (npm start) and you’re at http://localhost:3000.');
+        return;
+      }
 
       if (!res.ok) {
         setMessageContent(placeholder, data.error || 'Something went wrong. Try again.');
@@ -70,7 +76,7 @@
       history.push({ role: 'user', content: text });
       history.push({ role: 'assistant', content: data.reply });
     } catch (err) {
-      setMessageContent(placeholder, 'Network error. Check the server and try again.');
+      setMessageContent(placeholder, 'Could not reach the server. Start it with "npm start" and open http://localhost:3000, then try again.');
     } finally {
       sendBtn.disabled = false;
       inputEl.focus();

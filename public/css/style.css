@@ -113,6 +113,12 @@ body {
   padding: 0 0 1.5rem;
 }
 
+.categories-section--top {
+  padding: 0.75rem 0;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
 .tabs {
   display: flex;
   flex-wrap: wrap;

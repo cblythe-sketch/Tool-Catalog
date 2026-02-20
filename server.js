@@ -124,8 +124,14 @@ Keep answers concise and practical. Use markdown for lists and steps when helpfu
     res.json({ reply });
   } catch (err) {
     console.error('OpenAI error:', err.message);
-    const status = err.status === 401 ? 503 : 500;
-    res.status(status).json({ error: err.message || 'Chat request failed.' });
+    let message = err.message || 'Chat request failed.';
+    if (err.status === 429) {
+      message = 'Your OpenAI account is out of credits or over the usage limit. Add a payment method or check usage at https://platform.openai.com/account/billing';
+    } else if (err.status === 401) {
+      message = 'Invalid OpenAI API key. Check your key in .env';
+    }
+    const status = err.status === 401 ? 503 : err.status === 429 ? 503 : 500;
+    res.status(status).json({ error: message });
   }
 });
 

@@ -165,7 +165,7 @@
       "name": "Brake Bleeder Kit",
       "category": "automotive",
       "description": "Bleeds air from brake lines. One-person kits use vacuum or pressure.",
-      "image": "https://images.pexels.com/photos/8985918/pexels-photo-8985918.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
+      "image": "/images/brake-bleeder-kit.png"
     },
     {
       "id": "t16",

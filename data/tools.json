@@ -236,7 +236,7 @@
       "name": "Jigsaw",
       "category": "carpentry",
       "description": "Handheld power saw for curves and irregular cuts in wood and thin metal.",
-      "image": "https://images.pexels.com/photos/8961341/pexels-photo-8961341.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
+      "image": "/images/jigsaw.png"
     },
     {
       "id": "t25",
@@ -278,7 +278,7 @@
       "name": "Nail Set",
       "category": "carpentry",
       "description": "Punches nails slightly below surface for filling. Various tip sizes.",
-      "image": "https://images.pexels.com/photos/12172496/pexels-photo-12172496.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
+      "image": "/images/nail-set.png"
     },
     {
       "id": "t31",
@@ -299,7 +299,7 @@
       "name": "Pocket Hole Jig",
       "category": "carpentry",
       "description": "Guides drill and bit for pocket screws. Strong, hidden joints for cabinets and frames.",
-      "image": "https://images.pexels.com/photos/4491869/pexels-photo-4491869.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
+      "image": "/images/pocket-hole-jig.png"
     },
     {
       "id": "t34",
@@ -313,7 +313,7 @@
       "name": "Carpenter's Pencil",
       "category": "carpentry",
       "description": "Flat, durable pencil for marking lumber. Won’t roll away.",
-      "image": "https://images.pexels.com/photos/4491918/pexels-photo-4491918.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
+      "image": "/images/carpenters-pencil.png"
     },
     {
       "id": "t36",
@@ -355,7 +355,7 @@
       "name": "Fish Tape",
       "category": "electrical",
       "description": "Flexible tape to pull wire through conduit and walls.",
-      "image": "https://images.pexels.com/photos/5691657/pexels-photo-5691657.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
+      "image": "/images/fish-tape.png"
     },
     {
       "id": "t42",
@@ -404,7 +404,7 @@
       "name": "Basin Wrench",
       "category": "plumbing",
       "description": "Reaches behind sinks to tighten or loosen nuts on faucets and supply lines.",
-      "image": "https://images.pexels.com/photos/14953886/pexels-photo-14953886.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
+      "image": "/images/basin-wrench.png"
     },
     {
       "id": "t49",
@@ -425,7 +425,7 @@
       "name": "Pipe Threader",
       "category": "plumbing",
       "description": "Cuts threads on pipe for fittings. Manual or electric.",
-      "image": "https://images.pexels.com/photos/32588548/pexels-photo-32588548.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
+      "image": "/images/pipe-threader.png"
     },
     {
       "id": "t52",
@@ -439,14 +439,14 @@
       "name": "Flux & Soldering Torch",
       "category": "plumbing",
       "description": "For soldering copper pipe. Flux and lead-free solder.",
-      "image": "https://images.pexels.com/photos/7286029/pexels-photo-7286029.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
+      "image": "/images/flux-soldering-torch.png"
     },
     {
       "id": "t54",
       "name": "PEX Crimping Tool",
       "category": "plumbing",
       "description": "Crimps rings onto PEX tubing for fittings. Manual or cinch style.",
-      "image": "https://images.pexels.com/photos/14953886/pexels-photo-14953886.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
+      "image": "/images/pex-crimping-tool.png"
     },
     {
       "id": "t55",
@@ -467,7 +467,7 @@
       "name": "Mason's Hammer",
       "category": "masonry",
       "description": "One face for striking chisels; opposite for breaking and trimming brick and block.",
-      "image": "https://images.pexels.com/photos/6713842/pexels-photo-6713842.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
+      "image": "/images/mason-hammer.png"
     },
     {
       "id": "t58",

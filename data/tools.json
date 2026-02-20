@@ -116,7 +116,7 @@
       "name": "Funnel Set",
       "category": "automotive",
       "description": "Pour fluids into reservoirs without spillage. Various sizes for oil, coolant, transmission fluid.",
-      "image": "https://images.pexels.com/photos/7319169/pexels-photo-7319169.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
+      "image": "https://images.pexels.com/photos/8450475/pexels-photo-8450475.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
     },
     {
       "id": "t9",
@@ -396,7 +396,7 @@
       "name": "Basin Wrench",
       "category": "plumbing",
       "description": "Reaches behind sinks to tighten or loosen nuts on faucets and supply lines.",
-      "image": "https://images.pexels.com/photos/4194982/pexels-photo-4194982.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
+      "image": "https://images.pexels.com/photos/14953886/pexels-photo-14953886.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
     },
     {
       "id": "t49",
@@ -508,7 +508,7 @@
       "name": "Mortar Hoe",
       "category": "masonry",
       "description": "Mixing hoe for mortar and small batches of concrete.",
-      "image": "https://images.pexels.com/photos/4871352/pexels-photo-4871352.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
+      "image": "https://images.pexels.com/photos/19688828/pexels-photo-19688828.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
     },
     {
       "id": "t65",
@@ -613,21 +613,21 @@
       "name": "Mud Pan",
       "category": "drywall",
       "description": "Holds joint compound for loading the knife.",
-      "image": "https://images.pexels.com/photos/34005916/pexels-photo-34005916.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
+      "image": "https://images.pexels.com/photos/6474129/pexels-photo-6474129.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
     },
     {
       "id": "t80",
       "name": "Drywall Lift",
       "category": "drywall",
       "description": "Holds ceiling panels in place for solo installation.",
-      "image": "https://images.pexels.com/photos/29011466/pexels-photo-29011466.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
+      "image": "https://images.pexels.com/photos/6474313/pexels-photo-6474313.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
     },
     {
       "id": "t81",
       "name": "Rasp",
       "category": "drywall",
       "description": "Files and rasps for shaping drywall and filler.",
-      "image": "https://images.pexels.com/photos/5089136/pexels-photo-5089136.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
+      "image": "https://images.pexels.com/photos/16144865/pexels-photo-16144865.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
     },
     {
       "id": "t82",
@@ -802,7 +802,7 @@
       "name": "Post Hole Digger",
       "category": "outdoor",
       "description": "Two-handled tool for digging narrow holes for posts.",
-      "image": "https://images.pexels.com/photos/5529583/pexels-photo-5529583.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
+      "image": "/images/post-hole-digger.png"
     },
     {
       "id": "t107",
@@ -813,7 +813,7 @@
     },
     {
       "id": "t108",
-      "name": "String Trimmer",
+      "name": "String Trimmer/Weed-eater",
       "category": "outdoor",
       "description": "Trims grass along edges and fences. Electric or gas.",
       "image": "https://images.pexels.com/photos/29288279/pexels-photo-29288279.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
@@ -900,7 +900,7 @@
       "name": "Pliers Set",
       "category": "general",
       "description": "Slip-joint, needle-nose, and locking pliers for gripping, bending, cutting.",
-      "image": "https://images.pexels.com/photos/5194769/pexels-photo-5194769.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
+      "image": "https://images.pexels.com/photos/6349398/pexels-photo-6349398.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
     },
     {
       "id": "t121",

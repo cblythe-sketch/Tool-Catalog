@@ -26,12 +26,17 @@ if (!apiKey) {
 const TOOLS = [
   { name: 'Pocket Hole Jig', query: 'pocket hole jig Kreg woodworking tool product' },
   { name: 'Nail Set', query: 'nail set punch tool carpentry close up' },
-  { name: 'Mortar Hoe', query: 'mortar hoe mixing tool masonry' },
+  { name: 'Mortar Hoe', query: 'masonry mixing hoe tool concrete mortar' },
+  { name: 'Basin Wrench', query: 'basin wrench plumbing tool long handle faucet nut' },
+  { name: 'Funnel Set', query: 'funnel set automotive oil pour' },
   { name: 'Pull Bar', query: 'flooring pull bar laminate installation tool' },
   { name: 'Knee Pads', query: 'work knee pads construction flooring product' },
   { name: 'Hoe', query: 'garden hoe weeding draw hoe tool soil' },
-  { name: 'Post Hole Digger', query: 'manual post hole digger clamshell two handles hand tool', resultIndex: 1 },
   { name: 'Notched Trowel', query: 'notched trowel tile adhesive spreading tool flooring', resultIndex: 1 },
+  { name: 'Pliers Set', query: 'pliers set assortment slip joint needle nose tool product' },
+  { name: 'Drywall Lift', query: 'drywall lift panel hoist ceiling installation tool' },
+  { name: 'Mud Pan', query: 'drywall mud pan joint compound tool' },
+  { name: 'Rasp', query: 'rasp tool file woodworking product' },
 ];
 
 async function searchPexels(query, perPage = 10) {

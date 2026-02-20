@@ -1,86 +1,64 @@
-# Polaris Tool & Building Catalog
+# Polaris Tool Catalog
 
-A full-stack website that catalogs hand tools and building materials by category. Includes a main page, category tabs (Automotive, Carpentry, Electrical, Plumbing, Masonry, General), and photos for each tool.
+A catalog of hand tools and building materials by category, with photos and an AI chat assistant for build advice and tool recommendations.
 
-## Stack
+## Prerequisites
 
-- **Backend:** Node.js, Express
-- **Frontend:** HTML, CSS, JavaScript (vanilla)
-- **Data:** JSON file (`data/tools.json`)
+- **Node.js** (v18 or later recommended)
+- **npm** (comes with Node.js)
 
-## Setup
+## Quick start
 
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
+### 1. Install dependencies
 
-2. Start the server:
-   ```bash
-   npm start
-   ```
+```bash
+npm install
+```
 
-3. Open [http://localhost:3000](http://localhost:3000) in your browser.
+### 2. Configure environment (optional for chat)
 
-## Matching each photo to the tool name
+Create a `.env` file in the project root (same folder as `package.json`):
 
-So that the image above each tool card shows **that specific tool** (e.g. spark plug socket, tire pressure gauge, multimeter), run the fetch script once with a free API key:
+```env
+# Required for the in-app AI chat
+OPENAI_API_KEY=your_openai_api_key
 
-1. Get a free **Pexels** API key: [pexels.com/api](https://www.pexels.com/api/) (recommended; 200 requests/hour).
-2. From the project folder run:
-   ```bash
-   PEXELS_API_KEY=your_key_here node scripts/fetch-unsplash-by-tool-name.js
-   ```
-   Or use **Unsplash**: get a key at [unsplash.com/developers](https://unsplash.com/developers), then:
-   ```bash
-   UNSPLASH_ACCESS_KEY=your_key_here node scripts/fetch-unsplash-by-tool-name.js
-   ```
-3. The script searches for a photo matching each tool name and updates `data/tools.json`. Restart or refresh the app to see the new images.
+# Optional: for updating tool images (npm run update-images)
+PEXELS_API_KEY=your_pexels_key
+```
 
-Copy `.env.example` to `.env` and add your key there if you prefer not to type it in the command.
+- **OPENAI_API_KEY** — Get one at [platform.openai.com](https://platform.openai.com/api-keys). Without it, the catalog still runs but the chat widget will show an error when you send a message.
+- **PEXELS_API_KEY** — Only needed if you run the image-update script. Get one at [pexels.com/api](https://www.pexels.com/api/).
 
-## AI chat agent
+### 3. Run the application
 
-The site includes a chat widget (button in the bottom-right) that answers questions about tools and gives **build/how-to instructions** (e.g. “I want to build a table”, “How do I change the oil in my car?”). It uses OpenAI and is aware of the tools in the catalog.
+```bash
+npm start
+```
 
-1. Get an **OpenAI API key**: [platform.openai.com/api-keys](https://platform.openai.com/api-keys)
-2. Add to `.env`: `OPENAI_API_KEY=your_key`
-3. Restart the server. Open the chat and ask e.g. “How do I change the oil in my car?” or “I want to build a table.”
+The server starts on **http://localhost:3000** (or the port set in the `PORT` environment variable).
 
-If `OPENAI_API_KEY` is not set, the chat panel will show an error when you send a message.
+### 4. Open in a browser
 
-## API
+Go to **http://localhost:3000**. You’ll see:
 
-- `GET /api/categories` — List all categories
-- `GET /api/tools` — List all tools (optional: `?category=automotive`)
-- `GET /api/tools/:id` — Get one tool by id
-- `POST /api/chat` — AI chat (body: `{ "message": "…", "history": [] }`)
+- Category tabs and a grid of tools with photos
+- A chat widget (bottom-right) for questions about tools and how to use them
+
+## Scripts
+
+| Command | Description |
+|--------|-------------|
+| `npm start` | Start the server (default port 3000). |
+| `npm run update-images` | Refresh tool photos from Pexels/Unsplash/Pixabay. Requires an API key in `.env` (see [docs/TOOL-IMAGE-SOURCES.md](docs/TOOL-IMAGE-SOURCES.md)). |
 
 ## Project structure
 
-```
-polaris_ideas_builds_tools/
-├── data/
-│   └── tools.json      # Categories and tools (with image URLs)
-├── public/
-│   ├── index.html
-│   ├── css/
-│   │   └── style.css
-│   └── js/
-│       └── app.js
-├── server.js
-├── package.json
-└── README.md
-```
+- `server.js` — Express server; serves the frontend and API.
+- `public/` — Static site (HTML, CSS, JS) and chat UI.
+- `data/tools.json` — Catalog data (categories and tools).
+- `scripts/` — Image-fetch and fix scripts for tool photos.
 
-## Adding tools
+## Deployment
 
-Edit `data/tools.json`. Each tool needs:
-
-- `id` — unique string (e.g. `"t23"`)
-- `name` — display name
-- `category` — one of: `automotive`, `carpentry`, `electrical`, `plumbing`, `masonry`, `general`
-- `description` — short description
-- `image` — full URL to a photo. To have each card show a photo of that specific tool, run `scripts/fetch-unsplash-by-tool-name.js` with a Pexels or Unsplash API key (see above). You can also replace any `image` in `data/tools.json` manually with a direct photo URL.
-
-To add a category, add an object to `categories` with `id`, `name`, and optional `icon` (emoji).
+Set `PORT` in your host’s environment if required (e.g. Railway, Heroku). Set `OPENAI_API_KEY` in the host’s environment so the chat works in production. Do not commit `.env`; it is listed in `.gitignore`.

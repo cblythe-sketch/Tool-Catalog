@@ -29,32 +29,35 @@
     d.textContent = s;
     return d.innerHTML;
   }
-  const CHAT_ICONS = { tools: '/images/chat/tools.svg', parts: '/images/chat/parts.svg', step: '/images/chat/step.svg' };
-  function makeIcon(src, alt) {
-    const img = document.createElement('img');
-    img.src = src;
-    img.alt = alt || '';
-    img.className = 'chat-instruct-icon';
-    img.setAttribute('aria-hidden', 'true');
-    return img;
+  let toolNameToId = null;
+  async function getToolNameToId() {
+    if (toolNameToId) return toolNameToId;
+    try {
+      const res = await fetch('/api/tools');
+      const data = await res.json();
+      const list = Array.isArray(data) ? data : (data.tools || []);
+      const map = {};
+      list.forEach(function (t) {
+        if (t.name && t.id) map[t.name] = t.id;
+      });
+      toolNameToId = map;
+      return map;
+    } catch (_) {
+      return {};
+    }
   }
-  function injectInstructionIcons(container) {
-    if (!container || !container.querySelector) return;
-    container.querySelectorAll('h2').forEach(function (h2) {
-      const text = (h2.textContent || '').trim().toLowerCase();
-      let icon = null;
-      if (/tools?(\s|$)|tools you'll need|tools needed/.test(text)) icon = CHAT_ICONS.tools;
-      else if (/parts?|materials?|supplies|materials you'll need|parts and materials/.test(text)) icon = CHAT_ICONS.parts;
-      else if (/step-by-step|assembly|instructions/.test(text)) icon = CHAT_ICONS.step;
-      if (icon) h2.parentNode.insertBefore(makeIcon(icon, ''), h2);
+  function linkToolNamesInContent(content, nameToId) {
+    if (!content || !nameToId) return content;
+    const names = Object.keys(nameToId).filter(function (n) { return n.length > 0; }).sort(function (a, b) { return b.length - a.length; });
+    let out = content;
+    names.forEach(function (name) {
+      const id = nameToId[name];
+      const link = '[' + name + '](/tool/' + id + ')';
+      var escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      var re = new RegExp('(?<!\\[)' + escaped + '(?!\\])', 'g');
+      out = out.replace(re, link);
     });
-    container.querySelectorAll('ol li, ul li, p').forEach(function (el) {
-      const text = (el.textContent || '').trim();
-      const isStep = /^\d+\.\s/.test(text) || /^step\s*\d+/i.test(text) || (el.querySelector('strong') && /step\s*\d+\.?/i.test(el.textContent));
-      const prev = el.previousElementSibling;
-      if (isStep && prev && prev.classList && prev.classList.contains('chat-instruct-icon')) return;
-      if (isStep) el.parentNode.insertBefore(makeIcon(CHAT_ICONS.step, ''), el);
-    });
+    return out;
   }
   function sanitizeMarkdownHtml(html) {
     const div = document.createElement('div');
@@ -67,18 +70,19 @@
   }
   function renderAssistantContent(content) {
     if (typeof marked === 'undefined') return escapeHtml(content).replace(/\n/g, '<br>');
-    const raw = marked.parse(content);
+    const withLinks = linkToolNamesInContent(content, toolNameToId);
+    const raw = marked.parse(withLinks);
     const html = typeof raw === 'string' ? raw : '';
     const div = sanitizeMarkdownHtml(html);
-    injectInstructionIcons(div);
     return div.innerHTML;
   }
   async function renderAssistantContentAsync(content) {
     if (typeof marked === 'undefined') return escapeHtml(content).replace(/\n/g, '<br>');
-    const raw = await Promise.resolve(marked.parse(content));
+    await getToolNameToId();
+    const withLinks = linkToolNamesInContent(content, toolNameToId);
+    const raw = await Promise.resolve(marked.parse(withLinks));
     const html = typeof raw === 'string' ? raw : '';
     const div = sanitizeMarkdownHtml(html);
-    injectInstructionIcons(div);
     return div.innerHTML;
   }
 

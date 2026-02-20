@@ -1,15 +1,15 @@
 /**
- * Fetches one photo per tool by searching for the tool name (Pexels or Unsplash),
- * then updates data/tools.json so each card shows a photo of that specific tool.
+ * Fetches one photo per tool by searching for the tool name, then updates
+ * data/tools.json so each card shows a photo of that specific tool.
  *
- * Use either:
- *   Pexels (recommended, 200 req/hour): https://www.pexels.com/api/
- *   Unsplash: https://unsplash.com/developers
+ * Sources (set one in .env):
+ *   Pexels (recommended): https://www.pexels.com/api/  — PEXELS_API_KEY
+ *   Unsplash: https://unsplash.com/developers          — UNSPLASH_ACCESS_KEY
+ *   Pixabay: https://pixabay.com/api/docs/              — PIXABAY_API_KEY
+ *     (Pixabay does not allow permanent hotlinking; prefer Pexels/Unsplash or
+ *      download Pixabay images and host yourself. See docs/TOOL-IMAGE-SOURCES.md)
  *
- * Run:
- *   PEXELS_API_KEY=your_key node scripts/fetch-unsplash-by-tool-name.js
- *   or
- *   UNSPLASH_ACCESS_KEY=your_key node scripts/fetch-unsplash-by-tool-name.js
+ * Run: npm run update-images  (or node scripts/fetch-unsplash-by-tool-name.js)
  */
 
 const fs = require('fs');
@@ -35,69 +35,165 @@ function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
 }
 
+// Override search queries so each tool gets a distinct, accurate image (avoids wrong/duplicate results).
+const CUSTOM_QUERIES = {
+  'Spark Plug Socket': 'spark plug socket wrench automotive tool',
+  'Creeper': 'mechanic creeper under car automotive dolly',
+  'Oil Drain Pan': 'oil drain pan motor oil change automotive',
+  'Breaker Bar': 'breaker bar wrench socket long handle',
+  'Fish Tape': 'fish tape electrical wire reel conduit',
+  'Post Hole Digger': 'manual post hole digger clamshell two handles hand tool',
+  'Hoe': 'garden hoe weeding draw hoe tool soil',
+  'Notched Trowel': 'notched trowel tile adhesive spreading tool flooring',
+  'Framing Square': 'framing square carpenter L square tool',
+  'Torque Wrench': 'torque wrench automotive socket',
+  'Ball Peen Hammer': 'ball peen hammer metalworking',
+  'Square': 'carpenter square L framing layout',
+  'Hand Saw': 'hand saw wood cutting',
+  'Table Saw': 'table saw woodworking',
+  'Lineman\'s Pliers': 'lineman pliers electrical',
+  'Pliers Set': 'pliers set tools assortment',
+  'Voltage Tester': 'voltage tester electrical',
+  'Circuit Tester': 'circuit tester multimeter electrical',
+  'PEX Crimping Tool': 'PEX crimping tool plumbing',
+  'Crimping Tool': 'wire crimping tool electrical',
+  'Staple Gun (Electric)': 'electric staple gun',
+  'Staple Gun (Manual)': 'manual staple gun hand',
+  'Pipe Wrench': 'pipe wrench plumbing',
+  'Deburring Tool': 'deburring tool pipe',
+  'Basin Wrench': 'basin wrench sink faucet',
+  'Adjustable Wrench': 'adjustable wrench',
+  'Drywall T-Square': 'drywall T-square',
+  'Drywall Knife': 'drywall knife putty',
+  'Drywall Lift': 'drywall lift panel hoist',
+  'Rubber Mallet': 'rubber mallet soft face',
+  'Pocket Hole Jig': 'pocket hole jig Kreg woodworking tool product',
+  'Nail Set': 'nail set punch tool carpentry close up',
+  'Mortar Hoe': 'mortar hoe mixing tool masonry',
+  'Pull Bar': 'flooring pull bar laminate installation tool',
+  'Knee Pads': 'work knee pads construction flooring product',
+};
+
+// Append to every search to favor tool-only / product shots (no people).
+const NO_PERSON_SUFFIX = ' product tool';
+
 function getSearchQuery(tool) {
+  if (CUSTOM_QUERIES[tool.name]) return CUSTOM_QUERIES[tool.name];
   const name = tool.name;
   const base = name.replace(/\s*\([^)]+\)\s*$/, '').trim();
-  const addTool = /^(Level|Square|Creeper|Router|Plunger|Rasp|Edger|Float|Hoe|Shovel|Rake|Clamp|Punch|Vise|Bar|Pull|Knife|Tray|Stick|Cloth|Tape|Magnet|Set|Kit|Ring)$/i;
-  if (addTool.test(base)) return `${base} tool`;
-  return base;
+  const addTool = /^(Level|Creeper|Router|Plunger|Rasp|Edger|Float|Hoe|Shovel|Rake|Clamp|Punch|Vise|Bar|Pull|Knife|Tray|Stick|Cloth|Tape|Magnet|Set|Kit|Ring)$/i;
+  const q = addTool.test(base) ? `${base} tool` : base;
+  const cat = tool.category && tool.category !== 'general' ? ` ${tool.category}` : '';
+  return `${q}${cat}`.trim();
 }
 
-async function searchPexels(apiKey, query) {
+const PER_PAGE = 15;
+const IMAGE_OPTS = '?auto=compress&w=400&fit=crop';
+
+async function searchPexels(apiKey, query, page = 1) {
   const url = new URL('https://api.pexels.com/v1/search');
   url.searchParams.set('query', query);
-  url.searchParams.set('per_page', '1');
+  url.searchParams.set('per_page', String(PER_PAGE));
+  url.searchParams.set('page', String(page));
 
   const res = await fetch(url.toString(), {
     headers: { Authorization: apiKey },
   });
   if (!res.ok) throw new Error(`Pexels API ${res.status}: ${await res.text()}`);
   const data = await res.json();
-  const photo = data.photos && data.photos[0];
-  if (!photo || !photo.src) return null;
-  return `${photo.src.medium}?auto=compress&w=400&fit=crop`;
+  const photos = (data.photos || []).filter((p) => p && p.id && p.src);
+  return photos.map((p) => ({
+    id: p.id,
+    url: `${p.src.medium}${IMAGE_OPTS}`,
+  }));
 }
 
-async function searchUnsplash(accessKey, query) {
+async function searchUnsplash(accessKey, query, page = 1) {
   const url = new URL('https://api.unsplash.com/search/photos');
   url.searchParams.set('query', query);
-  url.searchParams.set('per_page', '1');
+  url.searchParams.set('per_page', String(PER_PAGE));
+  url.searchParams.set('page', String(page));
   url.searchParams.set('client_id', accessKey);
 
   const res = await fetch(url.toString());
   if (!res.ok) throw new Error(`Unsplash API ${res.status}: ${await res.text()}`);
   const data = await res.json();
-  const photo = data.results && data.results[0];
-  if (!photo || !photo.urls) return null;
-  return `${photo.urls.regular}&w=400&h=300&fit=crop`;
+  const results = (data.results || []).filter((p) => p && p.id && p.urls);
+  return results.map((p) => ({
+    id: p.id,
+    url: `${p.urls.regular}&w=400&h=300&fit=crop`,
+  }));
+}
+
+async function searchPixabay(apiKey, query, page = 1) {
+  const url = new URL('https://pixabay.com/api/');
+  url.searchParams.set('key', apiKey);
+  url.searchParams.set('q', query);
+  url.searchParams.set('per_page', String(PER_PAGE));
+  url.searchParams.set('page', String(page));
+  url.searchParams.set('image_type', 'photo');
+
+  const res = await fetch(url.toString());
+  if (!res.ok) throw new Error(`Pixabay API ${res.status}: ${await res.text()}`);
+  const data = await res.json();
+  const hits = (data.hits || []).filter((p) => p && p.id && p.webformatURL);
+  return hits.map((p) => ({
+    id: `pixabay-${p.id}`,
+    url: p.webformatURL,
+  }));
 }
 
 async function main() {
   const pexelsKey = (process.env.PEXELS_API_KEY || '').trim();
   const unsplashKey = (process.env.UNSPLASH_ACCESS_KEY || '').trim();
+  const pixabayKey = (process.env.PIXABAY_API_KEY || '').trim();
   const usePexels = pexelsKey.length > 0;
+  const useUnsplash = !usePexels && unsplashKey.length > 0;
+  const usePixabay = !usePexels && !useUnsplash && pixabayKey.length > 0;
 
-  if (!pexelsKey && !unsplashKey) {
-    console.error('No API key found. Set PEXELS_API_KEY or UNSPLASH_ACCESS_KEY in .env (same folder as package.json).');
-    console.error('Get Pexels key: https://www.pexels.com/api/  Get Unsplash key: https://unsplash.com/developers');
+  if (!usePexels && !useUnsplash && !usePixabay) {
+    console.error('No API key found. Set one in .env:');
+    console.error('  PEXELS_API_KEY   https://www.pexels.com/api/');
+    console.error('  UNSPLASH_ACCESS_KEY  https://unsplash.com/developers');
+    console.error('  PIXABAY_API_KEY https://pixabay.com/api/docs/');
     process.exit(1);
   }
-  console.log('Using', usePexels ? 'Pexels' : 'Unsplash', '- fetching one photo per tool by name...\n');
+  const source = usePexels ? 'Pexels' : useUnsplash ? 'Unsplash' : 'Pixabay';
+  console.log('Using', source, '- one unique photo per tool (no duplicates)...\n');
 
   const search = usePexels
-    ? (q) => searchPexels(pexelsKey, q)
-    : (q) => searchUnsplash(unsplashKey, q);
-  const source = usePexels ? 'Pexels' : 'Unsplash';
+    ? (q, page) => searchPexels(pexelsKey, q, page)
+    : useUnsplash
+      ? (q, page) => searchUnsplash(unsplashKey, q, page)
+      : (q, page) => searchPixabay(pixabayKey, q, page);
 
   const data = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
+  const usedPhotoIds = new Set();
   let updated = 0;
   let failed = [];
 
   for (let i = 0; i < data.tools.length; i++) {
     const tool = data.tools[i];
-    const query = getSearchQuery(tool);
+    const query = getSearchQuery(tool) + NO_PERSON_SUFFIX;
+    let imageUrl = null;
     try {
-      const imageUrl = await search(query);
+      for (let page = 1; page <= 3; page++) {
+        const photos = await search(query, page);
+        if (!photos.length) break;
+        const pick = photos.find((p) => !usedPhotoIds.has(p.id));
+        if (pick) {
+          imageUrl = pick.url;
+          usedPhotoIds.add(pick.id);
+          break;
+        }
+      }
+      if (!imageUrl) {
+        const photos = await search(query, 1);
+        if (photos.length) {
+          imageUrl = photos[0].url;
+          usedPhotoIds.add(photos[0].id);
+        }
+      }
       if (imageUrl) {
         tool.image = imageUrl;
         updated++;
@@ -115,7 +211,7 @@ async function main() {
   }
 
   fs.writeFileSync(dataPath, JSON.stringify(data, null, 2));
-  console.log(`\nDone. Updated ${updated} tool images. Failed: ${failed.length}`);
+  console.log(`\nDone. Updated ${updated} tool images (all unique). Failed: ${failed.length}`);
   if (failed.length) console.log('Failed:', failed.map((f) => f.name).join(', '));
 }
 

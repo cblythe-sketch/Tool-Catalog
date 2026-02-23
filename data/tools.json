@@ -432,7 +432,7 @@
       "name": "Drain Snake / Auger",
       "category": "plumbing",
       "description": "Flexible cable to clear drain clogs. Hand crank or power.",
-      "image": "https://images.pexels.com/photos/16838155/pexels-photo-16838155.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
+      "image": "/images/drain-snake.png"
     },
     {
       "id": "t53",

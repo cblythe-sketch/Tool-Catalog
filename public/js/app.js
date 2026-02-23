@@ -225,14 +225,102 @@
       });
   }
 
+  function initIdentifyTool() {
+    const input = document.getElementById('identify-tool-input');
+    const previewWrap = document.getElementById('identify-tool-preview');
+    const previewImg = document.getElementById('identify-tool-img');
+    const clearBtn = document.getElementById('identify-tool-clear');
+    const submitBtn = document.getElementById('identify-tool-submit');
+    const resultWrap = document.getElementById('identify-tool-result');
+    const resultText = document.getElementById('identify-tool-result-text');
+    const resultLink = document.getElementById('identify-tool-result-link');
+    const loadingEl = document.getElementById('identify-tool-loading');
+    let currentDataUrl = null;
+
+    function hideAll() {
+      if (previewWrap) previewWrap.classList.add('hidden');
+      if (resultWrap) resultWrap.classList.add('hidden');
+      if (loadingEl) loadingEl.classList.add('hidden');
+    }
+
+    if (input) {
+      input.addEventListener('change', function () {
+        const file = input.files && input.files[0];
+        if (!file || !file.type.startsWith('image/')) {
+          hideAll();
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = function () {
+          currentDataUrl = reader.result;
+          if (previewImg) previewImg.src = currentDataUrl;
+          if (previewWrap) previewWrap.classList.remove('hidden');
+          if (resultWrap) resultWrap.classList.add('hidden');
+          if (loadingEl) loadingEl.classList.add('hidden');
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    if (clearBtn) {
+      clearBtn.addEventListener('click', function () {
+        currentDataUrl = null;
+        if (input) input.value = '';
+        if (previewImg) previewImg.src = '';
+        hideAll();
+      });
+    }
+
+    if (submitBtn) {
+      submitBtn.addEventListener('click', function () {
+        if (!currentDataUrl) return;
+        if (loadingEl) loadingEl.classList.remove('hidden');
+        if (resultWrap) resultWrap.classList.add('hidden');
+        submitBtn.disabled = true;
+        fetch(API_BASE + '/api/identify-tool', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ image: currentDataUrl }),
+        })
+          .then(function (r) {
+            if (!r.ok) throw new Error(r.statusText || 'Request failed');
+            return r.json();
+          })
+          .then(function (data) {
+            if (loadingEl) loadingEl.classList.add('hidden');
+            submitBtn.disabled = false;
+            if (resultWrap) resultWrap.classList.remove('hidden');
+            if (data.tool) {
+              resultText.textContent = 'Looks like: ' + data.tool.name;
+              resultLink.href = '/tool/' + encodeURIComponent(data.tool.id);
+              resultLink.textContent = 'View ' + data.tool.name;
+              resultLink.classList.remove('hidden');
+            } else {
+              resultText.textContent = data.message || 'Tool not recognized in our catalog.';
+              resultLink.classList.add('hidden');
+            }
+          })
+          .catch(function (err) {
+            if (loadingEl) loadingEl.classList.add('hidden');
+            submitBtn.disabled = false;
+            if (resultWrap) resultWrap.classList.remove('hidden');
+            resultText.textContent = 'Something went wrong. Try again or use the chat for help.';
+            resultLink.classList.add('hidden');
+          });
+      });
+    }
+  }
+
   function init() {
     const toolId = getToolIdFromPath();
     if (toolId) {
       loadToolDetail(toolId);
+      initIdentifyTool();
       return;
     }
     document.title = 'Polaris Tool & Building Catalog';
     showCatalog();
+    initIdentifyTool();
     loadCategories()
       .then(loadTools)
       .catch(console.error);

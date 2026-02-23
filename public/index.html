@@ -31,6 +31,26 @@
       <div class="container">
         <h1>Tool & Building Catalog</h1>
         <p>Browse by category to find the right hand tools and components for your project.</p>
+        <div class="identify-tool" id="identify-tool">
+          <h2 class="identify-tool-title">Identify a tool from a photo</h2>
+          <p class="identify-tool-desc">Take or upload a picture and we’ll try to match it to a tool in our catalog.</p>
+          <div class="identify-tool-actions">
+            <label class="identify-tool-label">
+              <input type="file" id="identify-tool-input" accept="image/*" capture="environment" aria-label="Choose or take a photo">
+              <span class="identify-tool-btn">Take or choose photo</span>
+            </label>
+          </div>
+          <div class="identify-tool-preview hidden" id="identify-tool-preview">
+            <img id="identify-tool-img" alt="Preview" />
+            <button type="button" class="identify-tool-clear" id="identify-tool-clear">Remove</button>
+            <button type="button" class="identify-tool-submit" id="identify-tool-submit">Identify tool</button>
+          </div>
+          <div class="identify-tool-result hidden" id="identify-tool-result">
+            <p class="identify-tool-result-text" id="identify-tool-result-text"></p>
+            <a href="#" class="identify-tool-result-link hidden" id="identify-tool-result-link">View tool</a>
+          </div>
+          <div class="identify-tool-loading hidden" id="identify-tool-loading">Identifying…</div>
+        </div>
       </div>
     </section>
 

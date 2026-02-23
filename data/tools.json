@@ -418,7 +418,7 @@
       "name": "Tubing Cutter",
       "category": "plumbing",
       "description": "Cuts copper, PEX, and plastic pipe cleanly. Rotating blade.",
-      "image": "https://images.pexels.com/photos/32532154/pexels-photo-32532154.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
+      "image": "/images/tube-cutter.png"
     },
     {
       "id": "t51",

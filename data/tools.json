@@ -488,7 +488,7 @@
       "name": "Jointer / Joining Trowel",
       "category": "masonry",
       "description": "Long flat trowel for smoothing concrete and floating.",
-      "image": "https://images.pexels.com/photos/33336594/pexels-photo-33336594.jpeg?auto=compress&cs=tinysrgb&h=350?auto=compress&w=400&fit=crop"
+      "image": "/images/jointer.png"
     },
     {
       "id": "t61",
